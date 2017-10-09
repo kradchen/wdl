@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weixin.product.mapper.ProductModelMapper" >
+  <resultMap id="BaseResultMap" type="com.weixin.product.model.ProductModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="prd_uid" property="prdUid" jdbcType="VARCHAR" />
+    <result column="prd_desc" property="prdDesc" jdbcType="VARCHAR" />
+    <result column="prd_price" property="prdPrice" jdbcType="DECIMAL" />
+    <result column="page_name" property="pageName" jdbcType="VARCHAR" />
+    <result column="page_title" property="pageTitle" jdbcType="VARCHAR" />
+    <result column="create_dttm" property="createDttm" jdbcType="VARCHAR" />
+    <result column="update_dttm" property="updateDttm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, prd_uid, prd_desc, page_name, page_title, prd_price, create_dttm, update_dttm
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wdl_product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrdUid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wdl_product
+    where prd_uid = #{prdUid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wdl_product
+    order by id desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wdl_product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weixin.product.model.ProductModel" >
+    insert into wdl_product (id, prd_uid, prd_desc, 
+      page_name, page_title, create_dttm, 
+      update_dttm, prd_price)
+    values (#{id,jdbcType=INTEGER}, #{prdUid,jdbcType=VARCHAR}, #{prdDesc,jdbcType=VARCHAR}, 
+      #{pageName,jdbcType=VARCHAR}, #{pageTitle,jdbcType=VARCHAR}, #{createDttm,jdbcType=VARCHAR}, 
+      #{updateDttm,jdbcType=VARCHAR},#{prdPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.weixin.product.model.ProductModel" >
+    insert into wdl_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="prdUid != null" >
+        prd_uid,
+      </if>
+      <if test="prdDesc != null" >
+        prd_desc,
+      </if>
+      <if test="pageName != null" >
+        page_name,
+      </if>
+      <if test="pageTitle != null" >
+        page_title,
+      </if>
+      <if test="createDttm != null" >
+        create_dttm,
+      </if>
+      <if test="updateDttm != null" >
+        update_dttm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prdUid != null" >
+        #{prdUid,jdbcType=VARCHAR},
+      </if>
+      <if test="prdDesc != null" >
+        #{prdDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="pageName != null" >
+        #{pageName,jdbcType=VARCHAR},
+      </if>
+      <if test="pageTitle != null" >
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="createDttm != null" >
+        #{createDttm,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDttm != null" >
+        #{updateDttm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weixin.product.model.ProductModel" >
+    update wdl_product
+    <set >
+      <if test="prdUid != null" >
+        prd_uid = #{prdUid,jdbcType=VARCHAR},
+      </if>
+      <if test="prdDesc != null" >
+        prd_desc = #{prdDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="pageName != null" >
+        page_name = #{pageName,jdbcType=VARCHAR},
+      </if>
+      <if test="pageTitle != null" >
+        page_title = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="createDttm != null" >
+        create_dttm = #{createDttm,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDttm != null" >
+        update_dttm = #{updateDttm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weixin.product.model.ProductModel" >
+    update wdl_product
+    set prd_uid = #{prdUid,jdbcType=VARCHAR},
+      prd_desc = #{prdDesc,jdbcType=VARCHAR},
+      page_name = #{pageName,jdbcType=VARCHAR},
+      page_title = #{pageTitle,jdbcType=VARCHAR},
+      create_dttm = #{createDttm,jdbcType=VARCHAR},
+      update_dttm = #{updateDttm,jdbcType=VARCHAR},
+      prd_price = #{prdPrice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

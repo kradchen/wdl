@@ -1,0 +1,120 @@
+{
+    "button": [
+        {
+            "name": "精品线路", 
+            "sub_button": [
+                {
+                    "type": "view", 
+                    "name": "精品线路", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe1aae2706bb9023d&redirect_uri=http%3A%2F%2Fwdl666.com%2Fwdl%2FGetProductMenu&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect"
+                }
+            ]
+        },
+        {
+            "name": "我的", 
+            "sub_button": [
+                {
+                    "type": "view", 
+                    "name": "绑定手机", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe1aae2706bb9023d&redirect_uri=http%3A%2F%2Fwdl666.com%2Fwdl%2FBindingMenu&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect"
+                },
+                {
+                    "type": "view", 
+                    "name": "我的订单", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe1aae2706bb9023d&redirect_uri=http%3A%2F%2Fwdl666.com%2Fwdl%2FMyOrder&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect"
+                },
+                {
+                    "type": "view", 
+                    "name": "我的信息", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe1aae2706bb9023d&redirect_uri=http%3A%2F%2Fwdl666.com%2Fwdl%2FMyInfoMenu&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect"
+                }
+
+            ]
+        }
+
+    ]
+}
+
+/////生产环境
+{
+    "button": [
+        {
+            "name": "往期节目", 
+            "sub_button": [
+                {
+                    "type": "view", 
+                    "name": "俄罗斯（红场阅兵）", 
+                    "url": "http://mp.weixin.qq.com/s/m-t3B85hh7-a-rg7ksTiPQ", 
+                    "sub_button": [
+                        {
+                            "type": "view", 
+                            "name": "俄罗斯（红场阅兵）", 
+                            "url": "http://mp.weixin.qq.com/s/m-t3B85hh7-a-rg7ksTiPQ"
+                        }, 
+                        {
+                            "type": "view", 
+                            "name": "俄罗斯（经典永恒）", 
+                            "url": "http://mp.weixin.qq.com/s/PULgOHAeCvvi74Jy0X-kSA"
+                        }
+                    ]
+                }, 
+                {
+                    "type": "view", 
+                    "name": "俄罗斯（经典永恒）", 
+                    "url": "http://mp.weixin.qq.com/s/PULgOHAeCvvi74Jy0X-kSA"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "俄罗斯（寻找记忆）", 
+                    "url": "http://mp.weixin.qq.com/s/9MOz3YXJWdxWrbVCLU-9-Q"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "钱江大桥（临危受命）", 
+                    "url": "http://mp.weixin.qq.com/s/fl6xy2dW5syjMgStSEoYNA"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "更多精彩节目", 
+                    "url": "http://wdl666.cn/wdl/getActListMenu"
+                }
+            ]
+        }, 
+        {
+            "name": "我的", 
+            "sub_button": [
+                {
+                    "type": "view", 
+                    "name": "绑定手机", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxded002881efc112a&redirect_uri=http%3A%2F%2Fwdl666.cn%2Fwdl%2FBindingMenu&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect", 
+                    "sub_button": [ ]
+                }, 
+                {
+                    "type": "view", 
+                    "name": "我的信息", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxded002881efc112a&redirect_uri=http%3A%2F%2Fwdl666.cn%2Fwdl%2FMyInfoMenu&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect", 
+                    "sub_button": [ ]
+                }
+            ]
+        }
+    ]
+}
+
+
+
+//验证接口
+http://wdl666.com/wdl/Validate/doValidate
+
+//二维码
+{
+    "action_name": "QR_LIMIT_STR_SCENE", 
+    "action_info": {
+        "scene": {
+            "scene_str": "bd0921b959724a97bb308d1177c12fda"
+        }
+    }
+}
+
+
+//
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe1aae2706bb9023d&redirect_uri=http%3A%2F%2Fwdl666.com%2Fwdl%2FMyInfoMenu&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect

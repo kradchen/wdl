@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weixin.order.mapper.OrderModelMapper" >
+  <resultMap id="BaseResultMap" type="com.weixin.order.model.OrderModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="route_uid" property="routeUid" jdbcType="VARCHAR" />
+    <result column="team_uid" property="teamUid" jdbcType="VARCHAR" />
+    <result column="user_uid" property="userUid" jdbcType="VARCHAR" />
+    <result column="route_desc" property="routeDesc" jdbcType="VARCHAR" />
+    <result column="route_type" property="routeType" jdbcType="VARCHAR" />
+    <result column="date_slot" property="dateSlot" jdbcType="VARCHAR" />
+    <result column="date_count" property="dateCount" jdbcType="INTEGER" />
+    <result column="linker" property="linker" jdbcType="VARCHAR" />
+    <result column="linker_phone" property="linkerPhone" jdbcType="VARCHAR" />
+    <result column="visitor_count" property="visitorCount" jdbcType="INTEGER" />
+    <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
+    <result column="order_state" property="orderState" jdbcType="VARCHAR" />
+    <result column="order_pay" property="orderPay" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="create_dttm" property="createDttm" jdbcType="VARCHAR" />
+    <result column="update_dttm" property="updateDttm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_no, route_uid, team_uid, user_uid, route_desc, route_type, date_slot, date_count, 
+    linker, linker_phone, visitor_count, total_price, order_state, order_pay, comment, 
+    create_dttm, update_dttm
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wdl_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wdl_order
+    where route_uid = #{id,jdbcType=VARCHAR}
+  </select>  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wdl_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weixin.order.model.OrderModel" >
+    insert into wdl_order (id, order_no, route_uid, 
+      team_uid, user_uid, route_desc, 
+      route_type, date_slot, date_count, 
+      linker, linker_phone, visitor_count, 
+      total_price, order_state, order_pay, 
+      comment, create_dttm, update_dttm
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{routeUid,jdbcType=VARCHAR}, 
+      #{teamUid,jdbcType=VARCHAR}, #{userUid,jdbcType=VARCHAR}, #{routeDesc,jdbcType=VARCHAR}, 
+      #{routeType,jdbcType=VARCHAR}, #{dateSlot,jdbcType=VARCHAR}, #{dateCount,jdbcType=INTEGER}, 
+      #{linker,jdbcType=VARCHAR}, #{linkerPhone,jdbcType=VARCHAR}, #{visitorCount,jdbcType=INTEGER}, 
+      #{totalPrice,jdbcType=DECIMAL}, #{orderState,jdbcType=VARCHAR}, #{orderPay,jdbcType=VARCHAR}, 
+      #{comment,jdbcType=VARCHAR}, #{createDttm,jdbcType=VARCHAR}, #{updateDttm,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.weixin.order.model.OrderModel" >
+    insert into wdl_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="routeUid != null" >
+        route_uid,
+      </if>
+      <if test="teamUid != null" >
+        team_uid,
+      </if>
+      <if test="userUid != null" >
+        user_uid,
+      </if>
+      <if test="routeDesc != null" >
+        route_desc,
+      </if>
+      <if test="routeType != null" >
+        route_type,
+      </if>
+      <if test="dateSlot != null" >
+        date_slot,
+      </if>
+      <if test="dateCount != null" >
+        date_count,
+      </if>
+      <if test="linker != null" >
+        linker,
+      </if>
+      <if test="linkerPhone != null" >
+        linker_phone,
+      </if>
+      <if test="visitorCount != null" >
+        visitor_count,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="orderState != null" >
+        order_state,
+      </if>
+      <if test="orderPay != null" >
+        order_pay,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="createDttm != null" >
+        create_dttm,
+      </if>
+      <if test="updateDttm != null" >
+        update_dttm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="routeUid != null" >
+        #{routeUid,jdbcType=VARCHAR},
+      </if>
+      <if test="teamUid != null" >
+        #{teamUid,jdbcType=VARCHAR},
+      </if>
+      <if test="userUid != null" >
+        #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="routeDesc != null" >
+        #{routeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="routeType != null" >
+        #{routeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dateSlot != null" >
+        #{dateSlot,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCount != null" >
+        #{dateCount,jdbcType=INTEGER},
+      </if>
+      <if test="linker != null" >
+        #{linker,jdbcType=VARCHAR},
+      </if>
+      <if test="linkerPhone != null" >
+        #{linkerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorCount != null" >
+        #{visitorCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPay != null" >
+        #{orderPay,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createDttm != null" >
+        #{createDttm,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDttm != null" >
+        #{updateDttm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weixin.order.model.OrderModel" >
+    update wdl_order
+    <set >
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="routeUid != null" >
+        route_uid = #{routeUid,jdbcType=VARCHAR},
+      </if>
+      <if test="teamUid != null" >
+        team_uid = #{teamUid,jdbcType=VARCHAR},
+      </if>
+      <if test="userUid != null" >
+        user_uid = #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="routeDesc != null" >
+        route_desc = #{routeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="routeType != null" >
+        route_type = #{routeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dateSlot != null" >
+        date_slot = #{dateSlot,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCount != null" >
+        date_count = #{dateCount,jdbcType=INTEGER},
+      </if>
+      <if test="linker != null" >
+        linker = #{linker,jdbcType=VARCHAR},
+      </if>
+      <if test="linkerPhone != null" >
+        linker_phone = #{linkerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorCount != null" >
+        visitor_count = #{visitorCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderState != null" >
+        order_state = #{orderState,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPay != null" >
+        order_pay = #{orderPay,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createDttm != null" >
+        create_dttm = #{createDttm,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDttm != null" >
+        update_dttm = #{updateDttm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weixin.order.model.OrderModel" >
+    update wdl_order
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      route_uid = #{routeUid,jdbcType=VARCHAR},
+      team_uid = #{teamUid,jdbcType=VARCHAR},
+      user_uid = #{userUid,jdbcType=VARCHAR},
+      route_desc = #{routeDesc,jdbcType=VARCHAR},
+      route_type = #{routeType,jdbcType=VARCHAR},
+      date_slot = #{dateSlot,jdbcType=VARCHAR},
+      date_count = #{dateCount,jdbcType=INTEGER},
+      linker = #{linker,jdbcType=VARCHAR},
+      linker_phone = #{linkerPhone,jdbcType=VARCHAR},
+      visitor_count = #{visitorCount,jdbcType=INTEGER},
+      total_price = #{totalPrice,jdbcType=DECIMAL},
+      order_state = #{orderState,jdbcType=VARCHAR},
+      order_pay = #{orderPay,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      create_dttm = #{createDttm,jdbcType=VARCHAR},
+      update_dttm = #{updateDttm,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weixin.userinfo.mapper.UserinfoModelMapper" >
+  <resultMap id="BaseResultMap" type="com.weixin.userinfo.model.UserinfoModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="agent_uid" property="agentUid" jdbcType="VARCHAR" />
+    <result column="merge_key" property="mergeKey" jdbcType="VARCHAR" />
+    <result column="user_uid" property="userUid" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="user_spec" property="userSpec" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_dttm" property="createDttm" jdbcType="VARCHAR" />
+    <result column="update_dttm" property="updateDttm" jdbcType="VARCHAR" />
+    <result column="data_src" property="dataSrc" jdbcType="VARCHAR" />
+    <result column="user_secret" property="userSecret" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="e_mail" property="eMail" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="id_type" property="idType" jdbcType="VARCHAR" />
+    <result column="id_no" property="idNo" jdbcType="VARCHAR" />
+    <result column="my_img" property="myImg" jdbcType="VARCHAR" />
+    <result column="birth_place" property="birthPlace" jdbcType="VARCHAR" />
+    <result column="wx_openid" property="wxOpenid" jdbcType="VARCHAR" />
+    <result column="wx_nickname" property="wxNickname" jdbcType="VARCHAR" />
+    <result column="wx_lang" property="wxLang" jdbcType="VARCHAR" />
+    <result column="wx_city" property="wxCity" jdbcType="VARCHAR" />
+    <result column="wx_province" property="wxProvince" jdbcType="VARCHAR" />
+    <result column="wx_country" property="wxCountry" jdbcType="VARCHAR" />
+    <result column="wx_headimgurl" property="wxHeadimgurl" jdbcType="VARCHAR" />
+    <result column="wx_sub_time" property="wxSubTime" jdbcType="VARCHAR" />
+    <result column="wx_phone" property="wxPhone" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, agent_uid, merge_key, user_uid, mobile, user_name, user_type, sex, user_spec, 
+    remark, create_dttm, update_dttm, data_src, user_secret, addr, e_mail, qq, id_type, 
+    id_no, my_img, birth_place, wx_openid, wx_nickname, wx_lang, wx_city, wx_province, 
+    wx_country, wx_headimgurl, wx_sub_time, wx_phone, flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wdl_userinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserSecretKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wdl_userinfo
+    where user_secret = #{userSecret,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUserUid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wdl_userinfo
+    where user_uid = #{userUid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectCustomerCntByUid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    count(1) as id
+    from wdl_userinfo
+    where merge_key = #{userUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wdl_userinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weixin.userinfo.model.UserinfoModel" >
+    insert into wdl_userinfo (id, agent_uid, merge_key, 
+      user_uid, mobile, user_name, 
+      user_type, sex, user_spec, 
+      remark, create_dttm, update_dttm, 
+      data_src, user_secret, addr, 
+      e_mail, qq, id_type, 
+      id_no, my_img, birth_place, 
+      wx_openid, wx_nickname, wx_lang, 
+      wx_city, wx_province, wx_country, 
+      wx_headimgurl, wx_sub_time, wx_phone, 
+      flag)
+    values (#{id,jdbcType=INTEGER}, #{agentUid,jdbcType=VARCHAR}, #{mergeKey,jdbcType=VARCHAR}, 
+      #{userUid,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{userSpec,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createDttm,jdbcType=VARCHAR}, #{updateDttm,jdbcType=VARCHAR}, 
+      #{dataSrc,jdbcType=VARCHAR}, #{userSecret,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, 
+      #{eMail,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{idType,jdbcType=VARCHAR}, 
+      #{idNo,jdbcType=VARCHAR}, #{myImg,jdbcType=VARCHAR}, #{birthPlace,jdbcType=VARCHAR}, 
+      #{wxOpenid,jdbcType=VARCHAR}, #{wxNickname,jdbcType=VARCHAR}, #{wxLang,jdbcType=VARCHAR}, 
+      #{wxCity,jdbcType=VARCHAR}, #{wxProvince,jdbcType=VARCHAR}, #{wxCountry,jdbcType=VARCHAR}, 
+      #{wxHeadimgurl,jdbcType=VARCHAR}, #{wxSubTime,jdbcType=VARCHAR}, #{wxPhone,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.weixin.userinfo.model.UserinfoModel" >
+    insert into wdl_userinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="agentUid != null" >
+        agent_uid,
+      </if>
+      <if test="mergeKey != null" >
+        merge_key,
+      </if>
+      <if test="userUid != null" >
+        user_uid,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="userSpec != null" >
+        user_spec,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createDttm != null" >
+        create_dttm,
+      </if>
+      <if test="updateDttm != null" >
+        update_dttm,
+      </if>
+      <if test="dataSrc != null" >
+        data_src,
+      </if>
+      <if test="userSecret != null" >
+        user_secret,
+      </if>
+      <if test="addr != null" >
+        addr,
+      </if>
+      <if test="eMail != null" >
+        e_mail,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="idType != null" >
+        id_type,
+      </if>
+      <if test="idNo != null" >
+        id_no,
+      </if>
+      <if test="myImg != null" >
+        my_img,
+      </if>
+      <if test="birthPlace != null" >
+        birth_place,
+      </if>
+      <if test="wxOpenid != null" >
+        wx_openid,
+      </if>
+      <if test="wxNickname != null" >
+        wx_nickname,
+      </if>
+      <if test="wxLang != null" >
+        wx_lang,
+      </if>
+      <if test="wxCity != null" >
+        wx_city,
+      </if>
+      <if test="wxProvince != null" >
+        wx_province,
+      </if>
+      <if test="wxCountry != null" >
+        wx_country,
+      </if>
+      <if test="wxHeadimgurl != null" >
+        wx_headimgurl,
+      </if>
+      <if test="wxSubTime != null" >
+        wx_sub_time,
+      </if>
+      <if test="wxPhone != null" >
+        wx_phone,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="agentUid != null" >
+        #{agentUid,jdbcType=VARCHAR},
+      </if>
+      <if test="mergeKey != null" >
+        #{mergeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="userUid != null" >
+        #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="userSpec != null" >
+        #{userSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDttm != null" >
+        #{createDttm,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDttm != null" >
+        #{updateDttm,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSrc != null" >
+        #{dataSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="userSecret != null" >
+        #{userSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null" >
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null" >
+        #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="myImg != null" >
+        #{myImg,jdbcType=VARCHAR},
+      </if>
+      <if test="birthPlace != null" >
+        #{birthPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="wxOpenid != null" >
+        #{wxOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="wxNickname != null" >
+        #{wxNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="wxLang != null" >
+        #{wxLang,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCity != null" >
+        #{wxCity,jdbcType=VARCHAR},
+      </if>
+      <if test="wxProvince != null" >
+        #{wxProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCountry != null" >
+        #{wxCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="wxHeadimgurl != null" >
+        #{wxHeadimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="wxSubTime != null" >
+        #{wxSubTime,jdbcType=VARCHAR},
+      </if>
+      <if test="wxPhone != null" >
+        #{wxPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weixin.userinfo.model.UserinfoModel" >
+    update wdl_userinfo
+    <set >
+      <if test="agentUid != null" >
+        agent_uid = #{agentUid,jdbcType=VARCHAR},
+      </if>
+      <if test="mergeKey != null" >
+        merge_key = #{mergeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="userUid != null" >
+        user_uid = #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="userSpec != null" >
+        user_spec = #{userSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDttm != null" >
+        create_dttm = #{createDttm,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDttm != null" >
+        update_dttm = #{updateDttm,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSrc != null" >
+        data_src = #{dataSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="userSecret != null" >
+        user_secret = #{userSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null" >
+        e_mail = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null" >
+        id_type = #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        id_no = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="myImg != null" >
+        my_img = #{myImg,jdbcType=VARCHAR},
+      </if>
+      <if test="birthPlace != null" >
+        birth_place = #{birthPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="wxOpenid != null" >
+        wx_openid = #{wxOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="wxNickname != null" >
+        wx_nickname = #{wxNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="wxLang != null" >
+        wx_lang = #{wxLang,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCity != null" >
+        wx_city = #{wxCity,jdbcType=VARCHAR},
+      </if>
+      <if test="wxProvince != null" >
+        wx_province = #{wxProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCountry != null" >
+        wx_country = #{wxCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="wxHeadimgurl != null" >
+        wx_headimgurl = #{wxHeadimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="wxSubTime != null" >
+        wx_sub_time = #{wxSubTime,jdbcType=VARCHAR},
+      </if>
+      <if test="wxPhone != null" >
+        wx_phone = #{wxPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weixin.userinfo.model.UserinfoModel" >
+    update wdl_userinfo
+    set agent_uid = #{agentUid,jdbcType=VARCHAR},
+      merge_key = #{mergeKey,jdbcType=VARCHAR},
+      user_uid = #{userUid,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      user_spec = #{userSpec,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_dttm = #{createDttm,jdbcType=VARCHAR},
+      update_dttm = #{updateDttm,jdbcType=VARCHAR},
+      data_src = #{dataSrc,jdbcType=VARCHAR},
+      user_secret = #{userSecret,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      e_mail = #{eMail,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      id_type = #{idType,jdbcType=VARCHAR},
+      id_no = #{idNo,jdbcType=VARCHAR},
+      my_img = #{myImg,jdbcType=VARCHAR},
+      birth_place = #{birthPlace,jdbcType=VARCHAR},
+      wx_openid = #{wxOpenid,jdbcType=VARCHAR},
+      wx_nickname = #{wxNickname,jdbcType=VARCHAR},
+      wx_lang = #{wxLang,jdbcType=VARCHAR},
+      wx_city = #{wxCity,jdbcType=VARCHAR},
+      wx_province = #{wxProvince,jdbcType=VARCHAR},
+      wx_country = #{wxCountry,jdbcType=VARCHAR},
+      wx_headimgurl = #{wxHeadimgurl,jdbcType=VARCHAR},
+      wx_sub_time = #{wxSubTime,jdbcType=VARCHAR},
+      wx_phone = #{wxPhone,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByUserUid" parameterType="com.weixin.userinfo.model.UserinfoModel" >
+    update wdl_userinfo
+    set agent_uid = #{agentUid,jdbcType=VARCHAR},
+      merge_key = #{mergeKey,jdbcType=VARCHAR},
+      user_uid = #{userUid,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      user_spec = #{userSpec,jdbcType=VARCHAR},
+      
+      create_dttm = #{createDttm,jdbcType=VARCHAR},
+      update_dttm = #{updateDttm,jdbcType=VARCHAR},
+      user_secret = #{userSecret,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR}
+    where user_uid = #{userUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateAgentByUserUid" parameterType="com.weixin.userinfo.model.UserinfoModel" >
+    update wdl_userinfo
+    set agent_uid = #{agentUid,jdbcType=VARCHAR},
+      merge_key = #{mergeKey,jdbcType=VARCHAR},
+      update_dttm = #{updateDttm,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR}
+    where user_uid = #{userUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updatePhoneByUserUid" parameterType="com.weixin.userinfo.model.UserinfoModel" >
+    update wdl_userinfo
+    set mobile = #{mobile,jdbcType=VARCHAR},
+     wx_openid = #{wxOpenid,jdbcType=VARCHAR},
+     wx_nickname = #{wxNickname,jdbcType=VARCHAR},
+     wx_phone = #{wxPhone,jdbcType=VARCHAR},
+     wx_sub_time = #{wxSubTime,jdbcType=VARCHAR}
+    where user_uid = #{userUid,jdbcType=VARCHAR}
+  </update>
+</mapper>

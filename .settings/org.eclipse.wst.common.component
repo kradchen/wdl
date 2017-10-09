@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="wdl">
+        <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/mapper"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/configuration"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/controller"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/model"/>
+        <property name="context-root" value="wdl"/>
+        <property name="java-output-path" value="/wdl/WebRoot/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>

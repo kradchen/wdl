@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weixin.weixinuserinfo.mapper.IWeixinUserinfoModelMapper" >
+  <resultMap id="BaseResultMap" type="com.weixin.weixinuserinfo.model.WeixinUserinfoModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="weixin_appid" property="weixinAppid" jdbcType="CHAR" />
+    <result column="weixin_openid" property="weixinOpenid" jdbcType="VARCHAR" />
+    <result column="weixin_nickname" property="weixinNickname" jdbcType="VARCHAR" />
+    <result column="weixin_language" property="weixinLanguage" jdbcType="VARCHAR" />
+    <result column="weixin_city" property="weixinCity" jdbcType="VARCHAR" />
+    <result column="weixin_province" property="weixinProvince" jdbcType="VARCHAR" />
+    <result column="weixin_country" property="weixinCountry" jdbcType="VARCHAR" />
+    <result column="weixin_headimgurl" property="weixinHeadimgurl" jdbcType="VARCHAR" />
+    <result column="weixin_subscribe_time" property="weixinSubscribeTime" jdbcType="INTEGER" />
+    <result column="weixin_phone" property="weixinPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, weixin_appid, weixin_openid, weixin_nickname, weixin_language, weixin_city, weixin_province, 
+    weixin_country, weixin_headimgurl, weixin_subscribe_time, weixin_phone
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from qw_user_weixin
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByPhone" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from qw_user_weixin
+    where weixin_phone = #{weixinPhone,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByOpenID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from qw_user_weixin
+    where weixin_openid = #{weixinOpenid,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from qw_user_weixin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weixin.weixinuserinfo.model.WeixinUserinfoModel" useGeneratedKeys="true" keyProperty="id" >
+    insert into qw_user_weixin (id, weixin_appid, weixin_openid, 
+      weixin_nickname, weixin_language, weixin_city, 
+      weixin_province, weixin_country, weixin_headimgurl, 
+      weixin_subscribe_time, weixin_phone)
+    values (#{id,jdbcType=INTEGER}, #{weixinAppid,jdbcType=CHAR}, #{weixinOpenid,jdbcType=VARCHAR}, 
+      #{weixinNickname,jdbcType=VARCHAR}, #{weixinLanguage,jdbcType=VARCHAR}, #{weixinCity,jdbcType=VARCHAR}, 
+      #{weixinProvince,jdbcType=VARCHAR}, #{weixinCountry,jdbcType=VARCHAR}, #{weixinHeadimgurl,jdbcType=VARCHAR}, 
+      #{weixinSubscribeTime,jdbcType=INTEGER}, #{weixinPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.weixin.weixinuserinfo.model.WeixinUserinfoModel" >
+    insert into qw_user_weixin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="weixinAppid != null" >
+        weixin_appid,
+      </if>
+      <if test="weixinOpenid != null" >
+        weixin_openid,
+      </if>
+      <if test="weixinNickname != null" >
+        weixin_nickname,
+      </if>
+      <if test="weixinLanguage != null" >
+        weixin_language,
+      </if>
+      <if test="weixinCity != null" >
+        weixin_city,
+      </if>
+      <if test="weixinProvince != null" >
+        weixin_province,
+      </if>
+      <if test="weixinCountry != null" >
+        weixin_country,
+      </if>
+      <if test="weixinHeadimgurl != null" >
+        weixin_headimgurl,
+      </if>
+      <if test="weixinSubscribeTime != null" >
+        weixin_subscribe_time,
+      </if>
+      <if test="weixinPhone != null" >
+        weixin_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="weixinAppid != null" >
+        #{weixinAppid,jdbcType=CHAR},
+      </if>
+      <if test="weixinOpenid != null" >
+        #{weixinOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinNickname != null" >
+        #{weixinNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinLanguage != null" >
+        #{weixinLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinCity != null" >
+        #{weixinCity,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinProvince != null" >
+        #{weixinProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinCountry != null" >
+        #{weixinCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinHeadimgurl != null" >
+        #{weixinHeadimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinSubscribeTime != null" >
+        #{weixinSubscribeTime,jdbcType=INTEGER},
+      </if>
+      <if test="weixinPhone != null" >
+        #{weixinPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weixin.weixinuserinfo.model.WeixinUserinfoModel" >
+    update qw_user_weixin
+    <set >
+      <if test="weixinAppid != null" >
+        weixin_appid = #{weixinAppid,jdbcType=CHAR},
+      </if>
+      <if test="weixinOpenid != null" >
+        weixin_openid = #{weixinOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinNickname != null" >
+        weixin_nickname = #{weixinNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinLanguage != null" >
+        weixin_language = #{weixinLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinCity != null" >
+        weixin_city = #{weixinCity,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinProvince != null" >
+        weixin_province = #{weixinProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinCountry != null" >
+        weixin_country = #{weixinCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinHeadimgurl != null" >
+        weixin_headimgurl = #{weixinHeadimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinSubscribeTime != null" >
+        weixin_subscribe_time = #{weixinSubscribeTime,jdbcType=INTEGER},
+      </if>
+      <if test="weixinPhone != null" >
+        weixin_phone = #{weixinPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weixin.weixinuserinfo.model.WeixinUserinfoModel" >
+    update qw_user_weixin
+    set weixin_appid = #{weixinAppid,jdbcType=CHAR},
+      weixin_openid = #{weixinOpenid,jdbcType=VARCHAR},
+      weixin_nickname = #{weixinNickname,jdbcType=VARCHAR},
+      weixin_language = #{weixinLanguage,jdbcType=VARCHAR},
+      weixin_city = #{weixinCity,jdbcType=VARCHAR},
+      weixin_province = #{weixinProvince,jdbcType=VARCHAR},
+      weixin_country = #{weixinCountry,jdbcType=VARCHAR},
+      weixin_headimgurl = #{weixinHeadimgurl,jdbcType=VARCHAR},
+      weixin_subscribe_time = #{weixinSubscribeTime,jdbcType=INTEGER},
+      weixin_phone = #{weixinPhone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

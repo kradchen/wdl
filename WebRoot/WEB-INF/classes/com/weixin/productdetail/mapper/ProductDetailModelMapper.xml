@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weixin.productdetail.mapper.ProductDetailModelMapper" >
+  <resultMap id="BaseResultMap" type="com.weixin.productdetail.model.ProductDetailModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="product_uid" property="productUid" jdbcType="VARCHAR" />
+    <result column="user_uid" property="userUid" jdbcType="VARCHAR" />
+    <result column="visitor_name" property="visitorName" jdbcType="VARCHAR" />
+    <result column="visitor_id" property="visitorId" jdbcType="VARCHAR" />
+    <result column="visitor_phone" property="visitorPhone" jdbcType="VARCHAR" />
+    <result column="visitor_type" property="visitorType" jdbcType="VARCHAR" />
+    <result column="visitor_price" property="visitorPrice" jdbcType="DECIMAL" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="create_dttm" property="createDttm" jdbcType="VARCHAR" />
+    <result column="update_dttm" property="updateDttm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_no, product_uid, user_uid, visitor_name, visitor_id, visitor_phone, visitor_type, 
+    visitor_price, comment, create_dttm, update_dttm
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wdl_product_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wdl_product_detail
+    where user_uid = #{userUid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByUidPrdID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wdl_product_detail
+    where user_uid = #{userUid,jdbcType=VARCHAR} and product_uid = #{prdUid,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wdl_product_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weixin.productdetail.model.ProductDetailModel" >
+    insert into wdl_product_detail (id, uid, order_no, product_uid, 
+      user_uid, visitor_name, visitor_id, 
+      visitor_phone, visitor_type, visitor_price, 
+      comment, create_dttm, update_dttm
+      )
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{productUid,jdbcType=VARCHAR}, 
+      #{userUid,jdbcType=VARCHAR}, #{visitorName,jdbcType=VARCHAR}, #{visitorId,jdbcType=VARCHAR}, 
+      #{visitorPhone,jdbcType=VARCHAR}, #{visitorType,jdbcType=VARCHAR}, #{visitorPrice,jdbcType=DECIMAL}, 
+      #{comment,jdbcType=VARCHAR}, #{createDttm,jdbcType=VARCHAR}, #{updateDttm,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.weixin.productdetail.model.ProductDetailModel" >
+    insert into wdl_product_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+	  <if test="uid != null" >
+        uid,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="productUid != null" >
+        product_uid,
+      </if>
+      <if test="userUid != null" >
+        user_uid,
+      </if>
+      <if test="visitorName != null" >
+        visitor_name,
+      </if>
+      <if test="visitorId != null" >
+        visitor_id,
+      </if>
+      <if test="visitorPhone != null" >
+        visitor_phone,
+      </if>
+      <if test="visitorType != null" >
+        visitor_type,
+      </if>
+      <if test="visitorPrice != null" >
+        visitor_price,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="createDttm != null" >
+        create_dttm,
+      </if>
+      <if test="updateDttm != null" >
+        update_dttm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productUid != null" >
+        #{productUid,jdbcType=VARCHAR},
+      </if>
+      <if test="userUid != null" >
+        #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorName != null" >
+        #{visitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorId != null" >
+        #{visitorId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorPhone != null" >
+        #{visitorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorType != null" >
+        #{visitorType,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorPrice != null" >
+        #{visitorPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createDttm != null" >
+        #{createDttm,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDttm != null" >
+        #{updateDttm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weixin.productdetail.model.ProductDetailModel" >
+    update wdl_product_detail
+    <set >
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productUid != null" >
+        product_uid = #{productUid,jdbcType=VARCHAR},
+      </if>
+      <if test="userUid != null" >
+        user_uid = #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorName != null" >
+        visitor_name = #{visitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorId != null" >
+        visitor_id = #{visitorId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorPhone != null" >
+        visitor_phone = #{visitorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorType != null" >
+        visitor_type = #{visitorType,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorPrice != null" >
+        visitor_price = #{visitorPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createDttm != null" >
+        create_dttm = #{createDttm,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDttm != null" >
+        update_dttm = #{updateDttm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weixin.productdetail.model.ProductDetailModel" >
+    update wdl_product_detail
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      product_uid = #{productUid,jdbcType=VARCHAR},
+      user_uid = #{userUid,jdbcType=VARCHAR},
+      visitor_name = #{visitorName,jdbcType=VARCHAR},
+      visitor_id = #{visitorId,jdbcType=VARCHAR},
+      visitor_phone = #{visitorPhone,jdbcType=VARCHAR},
+      visitor_type = #{visitorType,jdbcType=VARCHAR},
+      visitor_price = #{visitorPrice,jdbcType=DECIMAL},
+      comment = #{comment,jdbcType=VARCHAR},
+      create_dttm = #{createDttm,jdbcType=VARCHAR},
+      update_dttm = #{updateDttm,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

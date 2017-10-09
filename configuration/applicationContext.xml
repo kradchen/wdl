@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- add by xxp 2016/11/03  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"  
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="  
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd  
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	
+	<!-- <import resource="mvc-dispatcher-servlet.xml"/> -->
+	
+	<!-- Property start -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<!-- <property name="location" value="classpath:config\redis.properties" 
+			/> -->
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="propertyConfigurerBean"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<!-- <property name="location" value="classpath:config\redis.properties" 
+			/> -->
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- Property end -->
+	
+
+	<!-- Redis start -->
+
+	
+
+	<!--start 验证redis链接配置 start -->
+	<bean id="jedisPoolConfigVerification" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="testOnBorrow" value="${redisVerification.pool.testOnBorrow}" />
+		<property name="maxIdle" value="${redisVerification.pool.maxIdle}" />
+		<property name="maxWaitMillis" value="${redisVerification.pool.maxWait}" />
+		<property name="maxTotal" value="${redisVerification.pool.maxActive}" />
+	</bean>
+
+	<bean id="jedisPoolVerification" class="redis.clients.jedis.JedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfigVerification"></constructor-arg>
+		<constructor-arg type="java.lang.String" index="1"
+			value="${redisVerification.ip}"></constructor-arg>
+		<constructor-arg type="int" index="2"
+			value="${redisVerification.port}"></constructor-arg>
+		<constructor-arg type="int" index="3"
+			value="${redisVerification.pool.maxWait}"></constructor-arg>
+		<constructor-arg type="java.lang.String" index="4"
+			value="${redisVerification.password}"></constructor-arg>
+	</bean>
+	<bean id="RedisVerificationUtil" class="redis.RedisVerificationUtil">
+		<constructor-arg index="0" type="redis.clients.jedis.JedisPool"
+			ref="jedisPoolVerification" />
+		<property name="defaultDB"  value="${redisVerification.defaultDB}"></property>
+	</bean>
+	<!--end 验证redis链接配置 end -->
+	<!-- Resdis end -->
+	
+	<!--start 数据库配置   start-->
+	<!--  <bean id="usingDataSourceHashSet" class="com.nb.mybatis.framework.UsingDataSourceSet">
+		 <property name="defaultDataBaseMapperName" value="mainDataSource"></property>
+		 <property name="typeMapper">
+			<set>
+      			<value>mainDataSource</value>
+    		</set>
+    	 </property>
+	</bean>
+	-->
+	<!-- 主数据源 -->
+	<!-- <bean id="mainDataSource" class="com.alibaba.druid.pool.DruidDataSource"  destroy-method="close"> -->
+	<bean id="mainDataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${db1.url}" />
+		<property name="username" value="${db1.userName}" />
+		<property name="password" value="${db1.passWord}" />
+		<property name="maxWait" value="${db1.maxWait}"></property>
+		<property name="defaultAutoCommit" value="true"></property>
+		<property name="maxIdle" value="${db1.maxIdle}" />
+		<property name="maxActive" value="${db1.maxActive}" />
+		
+		<!-- <property name="filters" value="stat" /> -->
+		<!--  <property name="name" value="mainDataSource" /> -->
+	</bean>
+		
+
+	
+	<!--  
+	<bean id="multipleDataSource" class="com.nb.mybatis.framework.MultipleDataSource">
+        <property name="defaultTargetDataSource" ref="mainDataSource"/>
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">     
+            	<entry value-ref="mainDataSource" key="mainDataSource"/>
+            </map>   
+        </property>
+    </bean>
+	-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="mainDataSource" />
+		<property name="configLocation" value="classpath:Configuration.xml" />
+		<property name="mapperLocations" value="classpath*:com/**/**/mapper/*.xml" />
+	</bean>
+	
+	<!--事务管理-->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="mainDataSource" />
+	</bean>
+	
+    <tx:annotation-driven transaction-manager="transactionManager"/> 
+	
+	
+	<!--end 数据库配置 end-->
+
+	<!-- start 全局mybatis定义 start -->
+	
+	 	<!-- end 全局mybatis定义 end -->
+	
+	<!--start 过滤器 	start-->
+	<bean id="pressureFilterBean" class="filter.PressureFilter">
+		<property name="redisVerificationUtil" ref="RedisVerificationUtil" />
+		<property name="maxLinkNum" value="${filter.maxLinkNum}"></property>
+		<property name="limitTime" value="${filter.limitTime}"></property>
+		<property name="openFilter" value="${filter.on}"></property>
+	</bean>
+	<!--end 过滤器 	end -->
+	
+	
+	<bean id="Mapper_Weixinuserinfo" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     <property name="mapperInterface" value="com.weixin.weixinuserinfo.mapper.IWeixinUserinfoModelMapper" />
+   </bean> 
+   
+   <bean id="Mapper_userinfo" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     <property name="mapperInterface" value="com.weixin.userinfo.mapper.UserinfoModelMapper" />
+   </bean> 
+   
+   <bean id="Mapper_product" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     <property name="mapperInterface" value="com.weixin.product.mapper.ProductModelMapper" />
+   </bean> 
+   
+   <bean id="Mapper_productdetail" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     <property name="mapperInterface" value="com.weixin.productdetail.mapper.ProductDetailModelMapper" />
+   </bean> 
+</beans> 
+
