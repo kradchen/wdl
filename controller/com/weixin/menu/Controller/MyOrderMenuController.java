@@ -93,12 +93,12 @@ public class MyOrderMenuController {
     		mSessionUserinfo.setWeixin_province(user.getProvince());
     		
     		//日志显示 , 可以传入自定义参数
-    		utility.Log.logger.error("MyOrderMenu"+user.getNickname());
-    		utility.Log.logger.error("MyOrderMenu"+user.getOpenid());
-    		utility.Log.logger.error("MyOrderMenu"+user.getHeadimgurl());
-    		utility.Log.logger.error("MyOrderMenu"+user.getCity());
-    		utility.Log.logger.error("MyOrderMenu"+user.getCountry());
-    		utility.Log.logger.error("MyOrderMenu"+user.getProvince());
+    		utility.Log.logger.error("MyOrderMenu："+user.getNickname());
+    		utility.Log.logger.error("MyOrderMenu："+user.getOpenid());
+    		utility.Log.logger.error("MyOrderMenu："+user.getHeadimgurl());
+    		utility.Log.logger.error("MyOrderMenu："+user.getCity());
+    		utility.Log.logger.error("MyOrderMenu："+user.getCountry());
+    		utility.Log.logger.error("MyOrderMenu："+user.getProvince());
             
             //针对绑定功能进行判断，如果没有绑定过的人员，直接出现绑定页面，如果已经绑定过了，直接显示人员信息和解绑页面
             UserinfoModel mUserinfoModelMapper = userinfoModelMapper.selectByUserUid(user.getOpenid());

@@ -176,12 +176,19 @@ public class AddProdutRestController extends BaseProperty  {
 	    
 	    if (mUserModel.getMergeKey().equals("0"))
 	    {
+            senderTemplate.setTouser("olGEXxOLUGlbcrPNX-Ej-qhQBxYA");
 	    	
+	    	//13858128191-olGEXxOLUGlbcrPNX-Ej-qhQBxYA
+		    senderTemplate.setTemplate_id(Template_NewOrder);
+		    senderTemplate.setData(data);
 	    }
 	    else
 	    {
 	    	//向客户经理发送一条信息
-	    	senderTemplate.setTouser(mUserModel.getMergeKey());
+	    	//senderTemplate.setTouser(mUserModel.getMergeKey());
+	    	senderTemplate.setTouser("olGEXxOLUGlbcrPNX-Ej-qhQBxYA");
+	    	
+	    	//13858128191-olGEXxOLUGlbcrPNX-Ej-qhQBxYA
 		    senderTemplate.setTemplate_id(Template_NewOrder);
 		    senderTemplate.setData(data);
 	    }

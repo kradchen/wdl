@@ -78,7 +78,8 @@ public class MyInfomMenuController {
     			if (!mUserModel.getUserType().toLowerCase().equals("customer"))
     			{
 	    			UserinfoModel mUserCnt = userinfoModelMapper.selectCustomerCntByUid(((sessionUserinfo)modelMap.get("sessionUserinfo")).getWeixin_openid());
-	    			String mExport = "<p class=\"box-company\">"+mUserCnt.getId().toString()+"</p>";
+	    			//String mExport = "<p class=\"box-company\">"+mUserCnt.getId().toString()+"</p>";
+	    			String mExport = "<span class=\"box-gz\">关注者"+mUserCnt.getId().toString()+"</span>";
 	    			mav.addObject("ExportCnt" , mExport);
     			}
     			else
@@ -88,11 +89,13 @@ public class MyInfomMenuController {
     				UserinfoModel mMySaler = userinfoModelMapper.selectByUserUid(mUserModel.getMergeKey());
     				if (mMySaler != null)
     				{
-    					mav.addObject("MySaller" , "<div class=\"share\" >我的客户经理:" + mMySaler.getUserName() + "</div>" );
+    					//mav.addObject("MySaller" , "<div class=\"share\" >我的客户经理:" + mMySaler.getUserName() + "</div>" );
+    					mav.addObject("MySaller" , mMySaler.getUserName() );
     					if (mMySaler.getMobile() != null)
     					{
-    						mav.addObject("MySallerPhone" , "<div class=\"share\" >手机:" + mMySaler.getMobile() + "</div>");
-    					}
+    						//mav.addObject("MySallerPhone" , "<div class=\"share\" >手机:" + mMySaler.getMobile() + "</div>");
+    						mav.addObject("MySallerPhone" , mMySaler.getMobile() );
+        					}
     				}
     			}
     		}
@@ -150,7 +153,8 @@ public class MyInfomMenuController {
     			if (!mUserModel.getUserType().toLowerCase().equals("customer"))
     			{
 	    			UserinfoModel mUserCnt = userinfoModelMapper.selectCustomerCntByUid(mSessionUserinfo.getWeixin_openid());
-	    			String mExport = "<p class=\"box-company\">"+mUserCnt.getId().toString()+"</p>";
+	    			//String mExport = "<p class=\"box-company\">"+mUserCnt.getId().toString()+"</p>";
+	    			String mExport = "<span class=\"box-gz\">关注者"+mUserCnt.getId().toString()+"</span>";
 	    			mav.addObject("ExportCnt" , mExport);
     			}
     			else
@@ -161,10 +165,13 @@ public class MyInfomMenuController {
     				UserinfoModel mMySaler = userinfoModelMapper.selectByUserUid(mUserModel.getMergeKey());
     				if (mMySaler != null)
     				{
-    					mav.addObject("MySaller" , "<div class=\"share\" >我的客户经理:" + mMySaler.getUserName() + "</div>" );
+    					//mav.addObject("MySaller" , "<div class=\"share\" >我的客户经理:" + mMySaler.getUserName() + "</div>" );
+    					mav.addObject("MySaller" , mMySaler.getUserName()  );
+    					
     					if (mMySaler.getMobile() != null)
     					{
-    						mav.addObject("MySallerPhone" , "<div class=\"share\" >手机:" + mMySaler.getMobile() + "</div>");
+    						//mav.addObject("MySallerPhone" , "<div class=\"share\" >手机:" + mMySaler.getMobile() + "</div>");
+    						mav.addObject("MySallerPhone" , mMySaler.getMobile()  );
     					}
     				}
     			}
